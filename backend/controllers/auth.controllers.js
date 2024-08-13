@@ -70,49 +70,54 @@ export const signup = async (req, res) => {
 
 
 
-export const login = async(req, res) => {
 
 
-    try{
 
-        const {username,password} = req.body;
+export const login = async (req, res) => {
+    try {
+        const { username, password } = req.body;
 
-        const user = await User.findOne({username})
-        const isPasswordCorrect = await brcrypt.compare(password, user?.password || "")
-
-        if (!isPasswordCorrect ||!user){
-            return res.status(400).json({error: "username or password incorrect"});
+        const user = await User.findOne({ username });
+        if (!user) {
+            return res.status(400).json({ error: "Username or password incorrect" });
         }
 
-        generateTokenAndSetCookies(user._id,res)
+        const isPasswordCorrect = await brcrypt.compare(password, user.password);
+        if (!isPasswordCorrect) {
+            return res.status(400).json({ error: "Username or password incorrect" });
+        }
+
+        generateTokenAndSetCookies(user._id, res);
 
         res.status(200).json({
             _id: user._id,
             fullName: user.fullName,
             username: user.username,
             profilePic: user.profilePic,
-        })
-
+        });
+    } catch (err) {
+        console.log("Error in login controller", err.message);
+        res.status(500).json({ error: "Internal server error" });
     }
-    catch(err){
-        console.log("Error in login controller",err.message);
-        res.status(500).json({error: "Internal server error"});
-    }
-
-   
 };
 
 
 
 export const logout = (req, res) => {
+    try {
+        // Clear the JWT cookie by setting it with an expired date
+        res.cookie("jwt", "", {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "Strict" : "Lax",
+            expires: new Date(0), // Expire the cookie immediately
+            path: '/' // Ensure this matches the path used when setting the cookie
+        });
 
-    try{
-        res.cookie("jwt","",{maxAge:0});
-        res.status(200).json({message: "Logged out successfully"});
-
-    }
-    catch(err){
-        console.log("Error in logout controller",err.message);
-        res.status(500).json({error: "Internal server error"});
+        res.status(200).json({ message: "Logged out successfully" });
+    } catch (err) {
+        console.error("Error in logout controller", err.message);
+        res.status(500).json({ error: "Internal server error" });
     }
 };
+
