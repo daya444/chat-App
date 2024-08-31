@@ -2,7 +2,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { useAuthContext } from '../context/authcontext';
-export const api = import.meta.env.VITE_APP_URL;
+
 
 
 
@@ -17,7 +17,7 @@ const useLogin = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post(`${api}/api/auth/login`, {
+      const res = await axios.post(`/api/auth/login`, {
         username,
         password,
       }, {
