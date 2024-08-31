@@ -18,10 +18,14 @@ const SignUp = () => {
 
   const { signup, loading }= useSignup()
 
+  
+
   const handlesubmit = async(e) =>{
-    e.preventDefault()
-    await signup(inputs)
-  }
+     
+        e.preventDefault() 
+        await signup(inputs) 
+        console.log("hitting")
+      }
 
   const handlecheckbox = (gender)=> {
      setinput({...inputs, gender })
@@ -43,7 +47,7 @@ const SignUp = () => {
         <span className='text-black pl-3 '>ChatApp</span>
       </h1>
 
-      <form onSubmit={handlesubmit}>
+      
         <div>
           <label className='label p-2 '>
             <span className='text-base label-text '>Full Name</span>
@@ -94,19 +98,20 @@ const SignUp = () => {
         </Link>
 
 
-        <div className='btn btn-block btn-sm mt-2'>
-            <button 
-            type='submit'
+       
+            <button  className='btn btn-block btn-sm mt-2'
+            onClick={handlesubmit}
+          
             disabled={loading}>
               {loading ? <span className='loading loading-spinner'></span> : "Signup"} 
               </button>
-          </div>
+         
 
 
 
 
 
-      </form>
+      
     </div>
 
   </div>

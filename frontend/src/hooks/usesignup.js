@@ -34,7 +34,7 @@ const useSignup = () => {
         
        
        
-        console.log(data)
+      
       }if(data.error){
         throw new Error(data.error)
 
