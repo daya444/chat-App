@@ -17,11 +17,14 @@ dotenv.config();
 const PORT = process.env.PORT || 5000;
 
 const __dirname = path.resolve()
-
 const corsOptions = {
-    origin: 'http://localhost:3000', // Your frontend URL
-    credentials: true, // This allows cookies to be sent
+    origin: process.env.NODE_ENV === 'production' 
+        ? 'https://chat-app-578p.onrender.com' // Your deployed frontend URL
+        : 'http://localhost:8000', // Local development URL
+    credentials: true,
 };
+app.use(cors(corsOptions));
+
 
 app.use(cors(corsOptions));
 app.use(express.json());
