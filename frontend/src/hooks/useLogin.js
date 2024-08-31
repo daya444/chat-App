@@ -2,6 +2,9 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 import { useAuthContext } from '../context/authcontext';
+export const api = import.meta.env.VITE_APP_URL;
+
+
 
 const useLogin = () => {
   const [loading, setLoading] = useState(false);
@@ -14,11 +17,11 @@ const useLogin = () => {
 
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8000/api/auth/login', {
+      const res = await axios.post(`${api}/api/auth/login`, {
         username,
         password,
       }, {
-        withCredentials: true // Include credentials in the request
+        withCredentials: true 
       });
 
       const data = res.data;
