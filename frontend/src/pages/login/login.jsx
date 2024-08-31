@@ -67,13 +67,13 @@ const Login = () => {
             {"Don't have an account?"}
           </Link>
 
-          <div className='btn btn-block btn-sm mt-2'>
+         
             <button
              onClick={handleSubmit}
-              className="z-50" disabled={loading}>
+              className="z-50 btn btn-block btn-sm mt-2" disabled={loading}>
               {loading ? <span className='loading loading-spinner'></span> : 'Login'}
             </button>
-          </div>
+        
         </form>
       </div>
     </div>
