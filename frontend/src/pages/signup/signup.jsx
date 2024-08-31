@@ -21,10 +21,10 @@ const SignUp = () => {
   
 
   const handlesubmit = async(e) =>{
-     
+    
         e.preventDefault() 
         await signup(inputs) 
-        console.log("hitting")
+        console.log("hitting") 
       }
 
   const handlecheckbox = (gender)=> {
@@ -47,7 +47,7 @@ const SignUp = () => {
         <span className='text-black pl-3 '>ChatApp</span>
       </h1>
 
-      
+      <form >
         <div>
           <label className='label p-2 '>
             <span className='text-base label-text '>Full Name</span>
@@ -111,7 +111,7 @@ const SignUp = () => {
 
 
 
-      
+      </form>
     </div>
 
   </div>

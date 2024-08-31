@@ -30,7 +30,7 @@ const Login = () => {
           <span className='text-black pl-3'>ChatApp</span>
         </h1>
 
-       
+        <form >
           <div>
             <label className='label p-2' htmlFor='username'>
               <span className='text-base label-text'>Username</span>
@@ -70,11 +70,11 @@ const Login = () => {
           <div className='btn btn-block btn-sm mt-2'>
             <button
              onClick={handleSubmit}
-             type='submit' className="z-50" disabled={loading}>
+              className="z-50" disabled={loading}>
               {loading ? <span className='loading loading-spinner'></span> : 'Login'}
             </button>
           </div>
-        
+        </form>
       </div>
     </div>
   );
