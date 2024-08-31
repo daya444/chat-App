@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useAuthContext } from '../context/authcontext';
+import { api } from './useLogin';
 
 const useLogout = () => {
     const [loading, setLoading] = useState(false);
@@ -10,7 +11,7 @@ const useLogout = () => {
     const logout = async () => {
         setLoading(true);
         try {
-            const res = await axios.post('http://localhost:8000/api/auth/logout', {}, {
+            const res = await axios.post(`${api}/api/auth/logout`, {}, {
                 withCredentials: true // Ensure cookies are sent
             });
 

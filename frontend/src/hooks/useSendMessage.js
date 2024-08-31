@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import toast from 'react-hot-toast';
 import useConversation from '../../zustand/useConversation';
+import { api } from './useLogin';
 
 const useSendMessage = () => {
     const [loading, setLoading] = useState(false); 
@@ -14,7 +15,7 @@ const useSendMessage = () => {
             const token = localStorage.getItem('jwt'); // Adjust this if you're storing the token elsewhere
 
             const res = await axios.post(
-                `http://localhost:8000/api/messages/send/${selectedConversation._id}`, 
+                `${api}/api/messages/send/${selectedConversation._id}`, 
                 { message },
                 {
                     headers: {

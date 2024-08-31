@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { api } from './useLogin';
 
 const useGetConversation = () => {
   const [loading, setLoading] = useState(false);
@@ -10,7 +11,7 @@ const useGetConversation = () => {
     const getConversation = async () => {
       setLoading(true);
       try {
-        const res = await axios.get('http://localhost:8000/api/users', {
+        const res = await axios.get(`${api}/api/users`, {
           withCredentials: true, // Important: allows sending cookies with the request
         });
         const data = res.data;
